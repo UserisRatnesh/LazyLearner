@@ -34,6 +34,7 @@ router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function*
     const admin = yield db_1.Admin.findOne({ username: username });
     if (admin) {
         res.status(403).json({
+            status: "error",
             msg: "admin already exist try login"
         });
     }
@@ -41,7 +42,7 @@ router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function*
         const newAdmin = new db_1.Admin({ username: username, password: password });
         yield newAdmin.save();
         const token = jsonwebtoken_1.default.sign({ id: newAdmin._id }, middleware_1.secret, { expiresIn: "1h" });
-        res.json({ msg: "Admin created successfully", token });
+        res.json({ status: "success", msg: "Admin created successfully", token });
     }
 }));
 router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -56,10 +57,11 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
     const admin = yield db_1.Admin.findOne({ username: username, password: password });
     if (admin) {
         const token = jsonwebtoken_1.default.sign({ id: admin._id }, middleware_1.secret, { expiresIn: "1h" });
-        res.status(200).json({ message: 'Logged in successfully', token });
+        res.status(200).json({ status: "success", msg: 'Logged in successfully', token });
     }
     else {
         res.status(411).json({
+            status: "error",
             msg: "user not found"
         });
     }

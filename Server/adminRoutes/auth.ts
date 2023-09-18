@@ -29,6 +29,7 @@ router.post("/signup", async(req,res )=>{
     if(admin)
     {
         res.status(403).json({
+            status : "error",
             msg : "admin already exist try login"
         })
     }
@@ -37,7 +38,7 @@ router.post("/signup", async(req,res )=>{
         const newAdmin = new Admin({username: username, password : password});
         await newAdmin.save();
         const token = jwt.sign({ id : newAdmin._id}, secret, {expiresIn : "1h" });
-        res.json({ msg : "Admin created successfully", token});
+        res.json({ status : "success", msg : "Admin created successfully", token});
     }
 
 });
@@ -58,10 +59,11 @@ router.post("/login", async(req,res)=>{
     if(admin)
     {
         const token = jwt.sign({ id : admin._id}, secret, {expiresIn : "1h"});
-        res.status(200).json({ message: 'Logged in successfully', token });
+        res.status(200).json({ status : "success", msg : 'Logged in successfully', token });
     }
     else{
         res.status(411).json({
+            status : "error",
             msg : "user not found"
         })
     }

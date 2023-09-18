@@ -10,17 +10,17 @@ export const authenticateJwt = ( req : Request, res: Response, next : NextFuncti
         const token = authHeader.split(" ")[1];
         jwt.verify(token, secret, (err, payload)=>{
             if (err) {
-                return res.sendStatus(403).json({
+                return res.status(403).json({
                     msg : "authentication failed"
                 });
             }
             if (!payload) {
-                return res.sendStatus(403).json({
+                return res.status(403).json({
                     msg : "authentication failed"
                 });
             }
             if (typeof payload === "string") {
-                return res.sendStatus(403).json({
+                return res.status(403).json({
                     msg : "authentication failed"
                 });
             }
@@ -31,7 +31,7 @@ export const authenticateJwt = ( req : Request, res: Response, next : NextFuncti
         });
     }
     else{
-        res.sendStatus(401).json({
+        res.status(401).json({
             msg : "authentication failed"
         });
     }

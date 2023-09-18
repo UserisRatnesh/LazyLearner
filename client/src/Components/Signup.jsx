@@ -42,12 +42,19 @@ const Signup =() =>{
                                 password : password
                             });
                             let data = response.data;
-                            localStorage.setItem("token", data.token);
-                            setAdmin({
+                            if(data.status === "error")
+                            {
+                                alert("User already present");
+                            }
+                            else{
+                                localStorage.setItem("token", data.token);
+                                setAdmin({
                                 isLoading : false,
                                 username : username
-                            })
-                            navigate("/courses");
+                                })
+                                navigate("/courses");
+                            }
+                            
                         }}
                         >Signup</Button>    
                         <Button onClick={()=>{

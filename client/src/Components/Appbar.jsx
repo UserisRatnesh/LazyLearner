@@ -34,7 +34,7 @@ const Appbar = () =>{
                         navigate("/courses")
                     }}>All Courses</Button>
                     <Button variant={"contained"} onClick={()=>{
-                        localStorage.setItem("tolen",null);
+                        localStorage.setItem("token",null);
                         setAdmin({
                             isLoading : false,
                             username : null
