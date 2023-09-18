@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Card, TextField, Button} from "@mui/material";
+import { Card, TextField, Button, Typography} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -14,7 +14,18 @@ const Signup =() =>{
 
     return (
         <div style={{display: "flex", minHeight: "80vh", justifyContent: "center", flexDirection: "column"}}>
+        <div style={{
+                paddingTop: 150,
+                marginBottom: 10,
+                display: "flex",
+                justifyContent: "center"
+            }}>
+        <Typography variant={"h6"}>
+                Welcome to LazyLearner. Sign up below
+                </Typography>
+        </div>
             <div style={{display: "flex", justifyContent: "center"}}>
+                
                 <Card variant={"outlined"} style={{width: 400, padding: 20, marginTop: 30, height: "100%"}}>
                     <TextField 
                         style={{marginBottom: 10}}
